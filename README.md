@@ -13,7 +13,7 @@
 
 ## Core Exercise
 
-Look at the OpenAPI schema here, your task is to set up a remote Postgres Database on ElephantSQL and connect to it from your code, the code should use SpringBoot to respond to API requests so that it matches the schema.
+Look at the OpenAPI schema below, your task is to set up a remote Postgres Database on ElephantSQL and connect to it from your code, the code should use SpringBoot to respond to API requests so that it matches the schema.
 
 The database table for Employees will be something like this:
 
