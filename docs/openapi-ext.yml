@@ -1,8 +1,10 @@
-openapi: 3.0.3
+openapi: 3.1.0
 info:
     title: Java API MVC With Postgres - Extension Criteria
-    description: |-
-    version: 0.2.2
+    description: Extension API for Java API with Postgres Exercise
+    version: 0.2.3
+    contact:
+        name: MVC with Postgres Exercise
 
 servers:
     - url: http://localhost:4000
@@ -17,18 +19,20 @@ paths:
                 - employees
             summary: Create a new employee
             description: Add a new employee to our list of available employees
+            operationId: createEmployee
             requestBody:
                 content:
                     application/json:
                         schema:
                             $ref: '#/components/schemas/CreateEmployee'
             responses:
-                201:
+                '201':
+                    description: Successfully created a new employee
                     content:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/Employee'
-                400:
+                '400':
                     description: "Could not create employee, please check all required fields are correct."
                     content:
                         application/json:
@@ -39,38 +43,37 @@ paths:
                 - employees
             summary: Get all employees
             description: Get all of the employees from our list
+            operationId: getEmployees
             responses:
-                200:
+                '200':
+                    description: Successfully returned a list of all employees
                     content:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/AllEmployees'
-                404:
-                    description: "No employees matching the criteria were found"
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Error404'
+
     /employees/{id}:
         get:
             tags:
                 - employees
             summary: Get an employee
             description: Get an employee by ID
+            operationId: getSpecificEmployee
             parameters:
                 - name: id
                   in: path
                   description: The ID of the employee to get
                   required: true
                   schema:
-                      type: long
+                      type: integer
             responses:
-                200:
+                '200':
+                    description: Successfully returned the specified employee
                     content:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/Employee'
-                404:
+                '404':
                     description: "No employees with that id were found"
                     content:
                         application/json:
@@ -81,32 +84,34 @@ paths:
                 - employees
             summary: Update an employee
             description: Update an existing employee by ID
+            operationId: updateEmployee
             parameters:
                 - name: id
                   in: path
                   description: The ID of the employee to update
                   required: true
                   schema:
-                      type: long
+                      type: integer
             requestBody:
                 content:
                     application/json:
                         schema:
                             $ref: '#/components/schemas/CreateEmployee'
             responses:
-                201:
+                '201':
+                    description: Successfully updated the specified employee
                     content:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/Employee'
-                400:
+                '400':
                     description: "Could not update the employee, please check all required fields are correct."
                     content:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/Error400'
-                404:
-                    description: "No employees with that id were found"
+                '404':
+                    description: "No employee with that id was found"
                     content:
                         application/json:
                             schema:
@@ -116,6 +121,7 @@ paths:
                 - employees
             summary: Delete an employee
             description: Remove an employee from our list of employees
+            operationId: deleteEmployee
             parameters:
                 - name: id
                   in: path
@@ -124,13 +130,14 @@ paths:
                   schema:
                       type: integer
             responses:
-                200:
+                '200':
+                    description: Successfully deleted the specified employee
                     content:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/Employee'
-                404:
-                    description: "No employees with that id were found"
+                '404':
+                    description: "No employee with that id was found"
                     content:
                         application/json:
                             schema:
@@ -141,18 +148,20 @@ paths:
                 - salaries
             summary: Create a new salary grade
             description: Add a new salary grade to our list of available salary grades
+            operationId: createSalary
             requestBody:
                 content:
                     application/json:
                         schema:
                             $ref: '#/components/schemas/CreateSalary'
             responses:
-                201:
+                '201':
+                    description: Successfully created a new salary grade
                     content:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/Salary'
-                400:
+                '400':
                     description: "Could not create a new salary grade, please check all required fields are correct."
                     content:
                         application/json:
@@ -163,38 +172,37 @@ paths:
                 - salaries
             summary: Get all salary grades
             description: Get all of the salary grades from our list
+            operationId: getSalaries
             responses:
-                200:
+                '200':
+                    description: Successfully returned all of the salary grades
                     content:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/AllSalaries'
-                404:
-                    description: "No salary grades matching the criteria were found"
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Error404'
+
     /salaries/{id}:
         get:
             tags:
                 - salaries
             summary: Get a salary grade
             description: Get a salary grade by ID
+            operationId: getSpecificSalary
             parameters:
                 - name: id
                   in: path
                   description: The ID of the salary grade to get
                   required: true
                   schema:
-                      type: long
+                      type: integer
             responses:
-                200:
+                '200':
+                    description: Returned the specific salary
                     content:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/Salary'
-                404:
+                '404':
                     description: "No salary grades matching that id were found"
                     content:
                         application/json:
@@ -205,31 +213,33 @@ paths:
                 - salaries
             summary: Update a salary grade
             description: Update an existing salary grade by ID
+            operationId: updateSalary
             parameters:
                 - name: id
                   in: path
                   description: The ID of the salary grade to update
                   required: true
                   schema:
-                      type: long
+                      type: integer
             requestBody:
                 content:
                     application/json:
                         schema:
                             $ref: '#/components/schemas/CreateSalary'
             responses:
-                201:
+                '201':
+                    description: Successfully updated the specified salary grade
                     content:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/Salary'
-                400:
+                '400':
                     description: "Could not update the salary grade, please check all required fields are correct."
                     content:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/Error400'
-                404:
+                '404':
                     description: "No salary grades matching that id were found"
                     content:
                         application/json:
@@ -240,21 +250,23 @@ paths:
                 - salaries
             summary: Delete a salary grade
             description: Remove a salary grade from our list of salary grades
+            operationId: deleteSalary
             parameters:
                 - name: id
                   in: path
                   description: The ID of the salary grade to delete
                   required: true
                   schema:
-                      type: long
+                      type: integer
             responses:
-                200:
+                '200':
+                    description: Successfully deleted the specified salary grade
                     content:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/Salary'
-                404:
-                    description: "No salary grades matching that id were found"
+                '404':
+                    description: No salary grade matching that id was found
                     content:
                         application/json:
                             schema:
@@ -265,19 +277,21 @@ paths:
                 - departments
             summary: Create a new department
             description: Add a new department to our list of available departments
+            operationId: createDepartment
             requestBody:
                 content:
                     application/json:
                         schema:
                             $ref: '#/components/schemas/CreateDepartment'
             responses:
-                201:
+                '201':
+                    description: Successfully created the specified department
                     content:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/Department'
-                400:
-                    description: "Could not create the new department, please check all required fields are correct."
+                '400':
+                    description: Could not create the new department, please check all required fields are correct.
                     content:
                         application/json:
                             schema:
@@ -287,39 +301,38 @@ paths:
                 - departments
             summary: Get all departments
             description: Get all of the departments from our list
+            operationId: getDepartments
             responses:
-                200:
+                '200':
+                    description: Successfully returned a list of all departments
                     content:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/AllDepartments'
-                404:
-                    description: "No departments were found"
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Error404'
+
     /departments/{id}:
         get:
             tags:
                 - departments
             summary: Get a department
             description: Get a department by ID
+            operationId: getSpecificDepartment
             parameters:
                 - name: id
                   in: path
                   description: The ID of the department to get
                   required: true
                   schema:
-                      type: long
+                      type: integer
             responses:
-                200:
+                '200':
+                    description: Successfully returned the specified Department
                     content:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/Department'
-                404:
-                    description: "No departments matching that id were found"
+                '404':
+                    description: No departments matching that id were found
                     content:
                         application/json:
                             schema:
@@ -329,32 +342,34 @@ paths:
                 - departments
             summary: Update a department
             description: Update an existing department by ID
+            operationId: updateDepartment
             parameters:
                 - name: id
                   in: path
                   description: The ID of the department to update
                   required: true
                   schema:
-                      type: long
+                      type: integer
             requestBody:
                 content:
                     application/json:
                         schema:
                             $ref: '#/components/schemas/CreateDepartment'
             responses:
-                201:
+                '201':
+                    description: Successfully updated the specified department
                     content:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/Department'
-                400:
-                    description: "Could not update the department, please check all required fields are correct."
+                '400':
+                    description: Could not update the department, please check all required fields are correct.
                     content:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/Error400'
-                404:
-                    description: "No departments matching that id were found"
+                '404':
+                    description: No departments matching that id were found
                     content:
                         application/json:
                             schema:
@@ -364,20 +379,22 @@ paths:
                 - departments
             summary: Delete a department
             description: Remove a department from our list of departments
+            operationId: deleteDepartment
             parameters:
                 - name: id
                   in: path
                   description: The ID of the department to delete
                   required: true
                   schema:
-                      type: long
+                      type: integer
             responses:
-                200:
+                '200':
+                    description: Successfully deleted the specified department
                     content:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/Department'
-                404:
+                '404':
                     description: "No departments matching that id were found"
                     content:
                         application/json:
@@ -406,7 +423,7 @@ components:
             type: object
             properties:
                 id:
-                    type: long
+                    type: integer
                     example: 1
                 name:
                     type: string
@@ -432,10 +449,10 @@ components:
                     type: string
                     example: "8"
                 minSalary:
-                    type: int
+                    type: integer
                     example: 25000
                 maxSalary:
-                    type: int
+                    type: integer
                     example: 30000
         Salary:
             type: object
@@ -444,10 +461,10 @@ components:
                     type: string
                     example: "8"
                 minSalary:
-                    type: int
+                    type: integer
                     example: 25000
                 maxSalary:
-                    type: int
+                    type: integer
                     example: 30000
         AllSalaries:
             type: array
@@ -468,7 +485,7 @@ components:
             type: object
             properties:
                 id:
-                    type: long
+                    type: integer
                     example: 1
                 name:
                     type: string
