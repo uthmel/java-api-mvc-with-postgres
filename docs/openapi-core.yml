@@ -1,8 +1,10 @@
-openapi: 3.0.3
+openapi: 3.1.0
 info:
     title: Java API MVC With Postgres - Core Criteria
-    description: |-
-    version: 0.2.2
+    description: Core API for Java API MVC with Postgres Exercise
+    version: 0.2.3
+    contact:
+        name: MVC with Postgres Exercise
 
 servers:
     - url: http://localhost:4000
@@ -15,13 +17,15 @@ paths:
                 - employees
             summary: Create a new employee
             description: Add a new employee to our list of available employees
+            operationId: createEmployee
             requestBody:
                 content:
                     application/json:
                         schema:
                             $ref: '#/components/schemas/CreateEmployee'
             responses:
-                201:
+                '201':
+                    description: Successfully created a new Employee
                     content:
                         application/json:
                             schema:
@@ -31,8 +35,10 @@ paths:
                 - employees
             summary: Get all employees
             description: Get all of the employees from our list
+            operationId: getEmployees
             responses:
-                200:
+                '200':
+                    description: Get a list of all employees
                     content:
                         application/json:
                             schema:
@@ -43,6 +49,7 @@ paths:
                 - employees
             summary: Get an employee
             description: Get an employee by ID
+            operationId: getSpecificEmployee
             parameters:
                 - name: id
                   in: path
@@ -51,7 +58,8 @@ paths:
                   schema:
                       type: long
             responses:
-                200:
+                '200':
+                    description: Successfully returned the specified employee
                     content:
                         application/json:
                             schema:
@@ -61,6 +69,7 @@ paths:
                 - employees
             summary: Update an employee
             description: Update an existing employee by ID
+            operationId: updateEmployee
             parameters:
                 - name: id
                   in: path
@@ -74,7 +83,8 @@ paths:
                         schema:
                             $ref: '#/components/schemas/CreateEmployee'
             responses:
-                201:
+                '201':
+                    description: Successfully updated the specified employee
                     content:
                         application/json:
                             schema:
@@ -84,6 +94,7 @@ paths:
                 - employees
             summary: Delete an employee
             description: Remove an employee from our list of employees
+            operationId: deleteEmployee
             parameters:
                 - name: id
                   in: path
@@ -92,7 +103,8 @@ paths:
                   schema:
                       type: long
             responses:
-                200:
+                '200':
+                    description: Successfully deleted the specified employee
                     content:
                         application/json:
                             schema:
@@ -120,7 +132,7 @@ components:
             type: object
             properties:
                 id:
-                    type: long
+                    type: integer
                     example: 1
                 name:
                     type: string
