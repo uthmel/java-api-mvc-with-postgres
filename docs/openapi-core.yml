@@ -56,7 +56,7 @@ paths:
                   description: The ID of the employee to get
                   required: true
                   schema:
-                      type: long
+                      type: integer
             responses:
                 '200':
                     description: Successfully returned the specified employee
@@ -76,7 +76,7 @@ paths:
                   description: The ID of the employee to update
                   required: true
                   schema:
-                      type: long
+                      type: integer
             requestBody:
                 content:
                     application/json:
@@ -101,7 +101,7 @@ paths:
                   description: The ID of the employee to delete
                   required: true
                   schema:
-                      type: long
+                      type: integer
             responses:
                 '200':
                     description: Successfully deleted the specified employee
